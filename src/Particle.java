@@ -14,7 +14,7 @@ public class Particle {
         this.width = width;
         if (yPos < height || ySpeed < -0.5f) {
             // Gravity, only if the particle is above the screen edge
-            ySpeed += 0.5;
+            ySpeed += 1;
 
             yPos += ySpeed;
         }
@@ -55,15 +55,15 @@ public class Particle {
         double yDistance = particle.yPos - yPos;
         double xDistance = particle.xPos - xPos;
         double totalDistance = Math.sqrt((xDistance * xDistance) + (yDistance * yDistance));
-        double repellingForce = 1.0 / (totalDistance + 1);
+        double repellingForce = (totalDistance < 19.4) ? 0.1 * totalDistance + 2 : 1 / totalDistance;
         double angle = Math.atan2(yDistance, xDistance);
 
-        if (totalDistance < 20) {
-            xSpeed -= repellingForce * 10 * Math.cos(angle);
-            ySpeed -= repellingForce * 10 * Math.sin(angle);
-            if (totalDistance < 17) {
-                ySpeed = (yDistance < 0) ? 1 + 0.5*Math.random() : -1 - 0.5*Math.random();
-            }
+        xSpeed -= repellingForce * Math.cos(angle);
+        ySpeed -= repellingForce * Math.sin(angle);
+        if (totalDistance < 5) {
+            xSpeed = 20 * Math.random() - 10;
+            ySpeed = 20 * Math.random() - 10;
         }
     }
 }
+

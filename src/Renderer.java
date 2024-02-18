@@ -14,7 +14,7 @@ public class Renderer extends JFrame {
         CustomPanel customPanel = new CustomPanel();
         add(customPanel, BorderLayout.CENTER);
 
-        Timer timer = new Timer(5, new TimerRenderer());
+        Timer timer = new Timer(1, new TimerRenderer());
         timer.start();
     }
     public void addParticle(Particle particle){
@@ -29,7 +29,7 @@ public class Renderer extends JFrame {
                         particle.collision(particle2);
                     }
                 }
-                particle.startGravity(getHeight()-80, getWidth()-55);
+                particle.startGravity(getHeight()-65, getWidth()-35);
                 repaint();
             }
         }
